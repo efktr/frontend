@@ -1,42 +1,54 @@
 import React, {Component} from 'react';
 import { __API__ } from './../../globals'
 import AutoComplete from 'material-ui/AutoComplete';
-import { ajax } from 'jquery';
+import { get } from 'jquery';
+
 
 // FROM
 // http://www.material-ui.com/#/components/auto-complete
 
 export default class AutoCompleteExampleSimple extends Component {
-    state = {
-        dataSource: [],
-    };
 
-    handleUpdateInput = (value) => {
-        let self = this;
-        console.log(value);
-        ajax({
-            url: __API__ + "/autocomplete?q=" + value,
-            success: (response) => {
-                response = response.map((e) => {
-                    return e.text
-                });
-                console.log([value].concat(response));
+    constructor(props) {
+        super(props);
+        this.onUpdateInput = this.onUpdateInput.bind(this);
+        this.state = {
+            dataSource : [],
+            inputValue : ''
+        }
+    }
+
+    performSearch() {
+        const self = this;
+        const url  = __API__ + "/autocomplete?q=" + self.state.inputValue;
+
+        if(this.state.inputValue !== '') {
+            get(url, (data) => {
+                let searchResults;
+
+                searchResults = data.map(e => e.text);
+
                 self.setState({
-                    dataSource: [value].concat(response),
+                    dataSource: searchResults
                 });
-            }
+            });
+        }
+    }
+
+    onUpdateInput = (inputValue) => {
+        const self = this;
+        this.setState({
+            inputValue: inputValue
+        }, () => {
+            self.performSearch();
         });
     };
 
     render() {
-        return (
-            <div>
-                <AutoComplete
-                    hintText="Drug or side effect"
-                    dataSource={this.state.dataSource}
-                    onUpdateInput={this.handleUpdateInput}
-                />
-            </div>
-        );
-    }
+        return <AutoComplete
+            hintText="Drug or side effect"
+            dataSource={this.state.dataSource}
+            filter={AutoComplete.caseInsensitiveFilter}
+            onUpdateInput={this.onUpdateInput} />
+    };
 }
