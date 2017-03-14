@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { __API__ , __SEARCH__, buildUrl} from './../../globals';
-import { get } from 'jquery';
+import {__API__ , __SEARCH__, buildUrl} from './../../globals';
+import {get} from 'jquery';
 import Result from './Result';
 import PubSub from 'pubsub-js';
 import {List} from 'material-ui/List';

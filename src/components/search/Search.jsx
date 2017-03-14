@@ -4,7 +4,6 @@ import AutoComplete from 'material-ui/AutoComplete';
 import { get } from 'jquery';
 import PubSub from 'pubsub-js';
 
-
 // FROM
 // http://www.material-ui.com/#/components/auto-complete
 
@@ -52,6 +51,7 @@ export default class Search extends Component {
         return <AutoComplete
             hintText="Drug or side effect"
             dataSource={this.state.dataSource}
+            underlineFocusStyle={{borderColor: "#c0646e"}}
             filter={AutoComplete.caseInsensitiveFilter}
             onUpdateInput={this.onUpdateInput} />
     };
