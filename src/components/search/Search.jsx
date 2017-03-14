@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
-import { __API__ } from './../../globals'
+import { __API__, __AUTOCOMPLETE__, buildUrl } from './../../globals';
 import AutoComplete from 'material-ui/AutoComplete';
 import { get } from 'jquery';
+import PubSub from 'pubsub-js';
 
 
 // FROM
 // http://www.material-ui.com/#/components/auto-complete
 
-export default class AutoCompleteExampleSimple extends Component {
+export default class Search extends Component {
 
     constructor(props) {
         super(props);
@@ -20,7 +21,7 @@ export default class AutoCompleteExampleSimple extends Component {
 
     performSearch() {
         const self = this;
-        const url  = __API__ + "/autocomplete?q=" + self.state.inputValue;
+        const url = buildUrl([__API__, __AUTOCOMPLETE__ + "?q=" + self.state.inputValue]);
 
         if(this.state.inputValue !== '') {
             get(url, (data) => {
@@ -31,6 +32,9 @@ export default class AutoCompleteExampleSimple extends Component {
                 self.setState({
                     dataSource: searchResults
                 });
+
+                // Fire NEW_SEARCH only after autocomplete data has been fetched and processed
+                PubSub.publish('NEW_SEARCH', self.state.inputValue);
             });
         }
     }

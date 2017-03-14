@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from '../../logo.png';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Search from '../search/Search'
+import SearchResults from '../searchResults/SearchResults'
 import './App.css';
 
 class App extends Component {
@@ -14,6 +15,10 @@ class App extends Component {
 
                 <MuiThemeProvider>
                     <Search />
+                </MuiThemeProvider>
+
+                <MuiThemeProvider>
+                    <SearchResults />
                 </MuiThemeProvider>
             </div>
         );
