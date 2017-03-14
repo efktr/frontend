@@ -11,7 +11,8 @@ export default class SearchResults extends Component {
         super(props);
         this.state = {
             results: [],
-            inputValue: ''
+            inputValue: '',
+            items: 10
         };
 
         PubSub.subscribe('NEW_SEARCH', (message, data) => {
@@ -21,6 +22,29 @@ export default class SearchResults extends Component {
                 this.performSearch();
             });
         });
+
+        this.handleScroll = this.handleScroll.bind(this);
+    }
+
+    handleScroll() {
+        const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+        const body = document.body;
+        const html = document.documentElement;
+        const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
+        const windowBottom = windowHeight + window.pageYOffset;
+        if (windowBottom >= docHeight) {
+            this.setState({
+                items: (this.state.items + 10 > this.state.results.length ? this.state.results.length : this.state.items + 10)
+            });
+        }
+    }
+
+    componentDidMount() {
+        window.addEventListener("scroll", this.handleScroll);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("scroll", this.handleScroll);
     }
 
     performSearch() {
@@ -30,7 +54,8 @@ export default class SearchResults extends Component {
         if(this.state.inputValue !== '') {
             get(url, (data) => {
                 self.setState({
-                    results: data
+                    results: data,
+                    items:10
                 });
             });
         }
@@ -45,7 +70,7 @@ export default class SearchResults extends Component {
         });
         return (
             <List>
-                {results.slice(0,10)}
+                {results.slice(0, this.state.items)}
             </List>
         );
     };

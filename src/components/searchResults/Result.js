@@ -11,7 +11,7 @@ export default class Result extends Component {
     render() {
         return <ListItem
             primaryText={this.element.name}
-            secondaryText={"Matched from " + this.element.type}
+            secondaryText={"Matched by a " + this.element.type}
         />
     };
 }
