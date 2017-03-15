@@ -1,0 +1,28 @@
+.searchResultsContainer {
+    width: 100%;
+    text-align: center;
+}
+
+/* unvisited link */
+a.searchResult:link {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+/* visited link */
+a.searchResult:visited {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+/* mouse over link */
+a.searchResult:hover {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+/* selected link */
+a.searchResult:active {
+    color: inherit;
+    text-decoration: inherit;
+}

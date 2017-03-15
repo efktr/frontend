@@ -1,6 +1,12 @@
+// API ENDPOINT
 export const __API__ = process.env.API || "http://localhost:3300";
-export const __SEARCH__ = process.env.API || "search";
-export const __AUTOCOMPLETE__ = process.env.API || "autocomplete";
+
+// SERVICE ENDPOINTS
+export const __SEARCH__ = "search";
+export const __AUTOCOMPLETE__ = "autocomplete";
+export const __DRUG__ = "drug";
+
+
 export const buildUrl = (components) => {
         let uri = '';
         for(let i=0; i<components.length; i++){

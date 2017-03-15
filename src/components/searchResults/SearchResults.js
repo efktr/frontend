@@ -4,6 +4,7 @@ import {get} from 'jquery';
 import Result from './Result';
 import PubSub from 'pubsub-js';
 import {List} from 'material-ui/List';
+import './SearchResults.css';
 
 export default class SearchResults extends Component {
 
@@ -69,7 +70,7 @@ export default class SearchResults extends Component {
             />;
         });
         return (
-            <List>
+            <List className="searchResultsContainer">
                 {results.slice(0, this.state.items)}
             </List>
         );

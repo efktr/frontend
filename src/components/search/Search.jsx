@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './Search.css';
 import { __API__, __AUTOCOMPLETE__, buildUrl } from './../../globals';
 import AutoComplete from 'material-ui/AutoComplete';
 import { get } from 'jquery';
@@ -48,11 +49,13 @@ export default class Search extends Component {
     };
 
     render() {
-        return <AutoComplete
-            hintText="Drug or side effect"
-            dataSource={this.state.dataSource}
-            underlineFocusStyle={{borderColor: "#c0646e"}}
-            filter={AutoComplete.caseInsensitiveFilter}
-            onUpdateInput={this.onUpdateInput} />
+        return <div className="searchContainer">
+            <AutoComplete
+                hintText="Drug or side effect"
+                dataSource={this.state.dataSource}
+                underlineFocusStyle={{borderColor: "#c0646e"}}
+                filter={AutoComplete.caseInsensitiveFilter}
+                onUpdateInput={this.onUpdateInput} />
+        </div>
     };
 }
