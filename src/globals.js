@@ -1,5 +1,5 @@
 // API ENDPOINT
-export const __API__ = process.env.API || "http://localhost:3300";
+export const __API__ = process.env.REACT_APP_API || "http://localhost:3300";
 
 // SERVICE ENDPOINTS
 export const __SEARCH__ = "search";
