@@ -15,7 +15,9 @@ export default class Result extends Component {
         this.state = {
             name: props.data.name,
             range: new Range(props.data.range),
-            open: false
+            open: false,
+            top: 0,
+            bottom: 0
         };
 
         this.positiveFeedback = this.positiveFeedback.bind(this);
@@ -24,19 +26,23 @@ export default class Result extends Component {
 
     handleRequestClose = () => {
         this.setState({
-            open: false
+            open: false,
+            top: 0,
+            bottom: 0
         });
     };
 
     positiveFeedback(event){
         this.setState({
-            open: true
+            open: true,
+            top: .05
         });
     }
 
     negativeFeedback(event){
         this.setState({
-            open: true
+            open: true,
+            top: -.05
         });
     }
 
@@ -68,7 +74,7 @@ export default class Result extends Component {
                 </Toolbar>
                 <LinearProgress
                     mode="determinate"
-                    value={this.state.range.mean()}
+                    value={this.state.range.mean() + this.state.top + this.state.bottom}
                     max={1}
                     min={0}
                     color="#c0646e"
