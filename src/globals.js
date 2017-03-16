@@ -5,6 +5,7 @@ export const __API__ = process.env.API || "http://localhost:3300";
 export const __SEARCH__ = "search";
 export const __AUTOCOMPLETE__ = "autocomplete";
 export const __DRUG__ = "drug";
+export const __ADR__ = "adr";
 
 
 export const buildUrl = (components) => {

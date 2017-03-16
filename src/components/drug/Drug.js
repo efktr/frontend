@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import LinearProgress from 'material-ui/LinearProgress';
 import {get} from 'jquery';
-import { __API__, __DRUG__, buildUrl } from './../../globals';
-import {Card, CardHeader, CardText} from 'material-ui/Card'
-
+import { __API__, __DRUG__, __ADR__, buildUrl } from './../../globals';
+import {Card, CardHeader, CardText} from 'material-ui/Card';
+import {List} from 'material-ui/List';
+import AdverseDrugReaction from './AdverseDrugReaction';
+import './Drug.css';
 
 export default class Result extends Component {
 
@@ -15,19 +16,31 @@ export default class Result extends Component {
             this.setState({
                 drug: drug
             });
+
+            this.fetchAdrs();
         }).fail(() => {
             // Most likely the drug didn't exist, so send back home!
             this.props.history.push('/');
-
         });
 
         this.state = {
-            drug: {}
+            drug: {},
+            drugbankId: match.params.drugbankId,
+            adr: []
         };
     }
 
-    // TODO - ADRs with linearprogress where value is avg(range)*100
-    // <LinearProgress mode="determinate" value={50} />
+    fetchAdrs() {
+        const url = buildUrl([__API__, __ADR__, this.state.drugbankId]);
+        get(url, (adrs) => {
+            this.setState({
+                adr: adrs
+            });
+        }).fail(() => {
+            console.log("Failed to load ADRs");
+        });
+    }
+
     render() {
         return (<div>
                 <Card>
@@ -44,6 +57,9 @@ export default class Result extends Component {
                         More: <a target="_blank" href={"https://drugbank.ca/drugs/" + this.state.drug.drugbankid}>Drugbank</a>
                     </CardText>
                 </Card>
+            <List>
+                {this.state.adr.map(e => <AdverseDrugReaction key={e.name} data={e}/>)}
+            </List>
             </div>
         )
     };

@@ -16,14 +16,6 @@ export default class SearchResults extends Component {
             items: 10
         };
 
-        PubSub.subscribe('NEW_SEARCH', (message, data) => {
-            this.setState({
-                inputValue: data
-            }, () => {
-                this.performSearch();
-            });
-        });
-
         this.handleScroll = this.handleScroll.bind(this);
     }
 
@@ -42,10 +34,20 @@ export default class SearchResults extends Component {
 
     componentDidMount() {
         window.addEventListener("scroll", this.handleScroll);
+
+        this.subscription = PubSub.subscribe('NEW_SEARCH', (message, data) => {
+            this.setState({
+                inputValue: data
+            }, () => {
+                this.performSearch();
+            });
+        });
     }
 
     componentWillUnmount() {
         window.removeEventListener("scroll", this.handleScroll);
+
+        PubSub.unsubscribe(this.subscription);
     }
 
     performSearch() {
