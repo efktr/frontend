@@ -9,8 +9,7 @@ COPY . /usr/src/app
 
 # Use defaults or ENV file
 RUN npm install
-RUN npm install -g serve
 
-EXPOSE 5000
+EXPOSE 3000
 
-CMD npm run build && serve -s build
+CMD ['npm', 'start']
