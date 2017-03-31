@@ -56,8 +56,6 @@ export default class Drug extends Component {
 
     }
 
-
-
     render() {
         return (<div>
                 <Card className="drug">

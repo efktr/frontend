@@ -40,6 +40,18 @@ export default class AdverseDrugReaction extends Component {
         });
     }
 
+    loading() {
+        if (!this.state.adrsLoaded) {
+            return (<div style={{
+                textAlign: "center",
+                margin: "2em"
+            }}>
+                <CircularProgress />
+            </div>)
+        }
+
+    }
+
     render() {
         return (<div>
                 <Card className="adr">
@@ -48,6 +60,7 @@ export default class AdverseDrugReaction extends Component {
                         subtitle={this.state.umlsId}
                     />
                 </Card>
+                {this.loading()}
                 <List>
                     {this.state.adrs.map(e => <Drug key={e.name} data={e}/>)}
                 </List>
