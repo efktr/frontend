@@ -6,7 +6,8 @@ export const __SEARCH__ = "search";
 export const __AUTOCOMPLETE__ = "autocomplete";
 export const __DRUG__ = "drug";
 export const __ADR__ = "adr";
-
+export const __DRUGS__ = "drugs";
+export const __ADRS__ = "adrs";
 
 export const buildUrl = (components) => {
         let uri = '';

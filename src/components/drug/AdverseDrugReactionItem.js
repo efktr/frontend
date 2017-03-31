@@ -8,7 +8,7 @@ import {Toolbar, ToolbarGroup} from 'material-ui/Toolbar';
 import IconButton from 'material-ui/IconButton';
 import Snackbar from 'material-ui/Snackbar';
 
-export default class Result extends Component {
+export default class AdverseDrugReactionItem extends Component {
 
     constructor(props) {
         super(props);

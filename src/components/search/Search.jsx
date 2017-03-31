@@ -35,6 +35,8 @@ export default class Search extends Component {
 
                 // Fire NEW_SEARCH only after autocomplete data has been fetched and processed
                 PubSub.publish('NEW_SEARCH', self.state.inputValue);
+            }).fail(() => {
+                console.log("There was an error processing the request")
             });
         }
     }

@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {get} from 'jquery';
-import { __API__, __DRUG__, __ADR__, buildUrl } from './../../globals';
+import { __API__, __DRUG__, __ADRS__, buildUrl } from './../../globals';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 import {List} from 'material-ui/List';
-import AdverseDrugReaction from './AdverseDrugReaction';
+import AdverseDrugReactionItem from './AdverseDrugReactionItem';
 import './Drug.css';
 
-export default class Result extends Component {
+export default class Drug extends Component {
 
     constructor({match}) {
         super();
@@ -31,7 +31,7 @@ export default class Result extends Component {
     }
 
     fetchAdrs() {
-        const url = buildUrl([__API__, __ADR__, this.state.drugbankId]);
+        const url = buildUrl([__API__, __ADRS__, this.state.drugbankId]);
         get(url, (adrs) => {
             this.setState({
                 adr: adrs
@@ -58,7 +58,7 @@ export default class Result extends Component {
                     </CardText>
                 </Card>
             <List>
-                {this.state.adr.map(e => <AdverseDrugReaction key={e.name} data={e}/>)}
+                {this.state.adr.map(e => <AdverseDrugReactionItem key={e.name} data={e}/>)}
             </List>
             </div>
         )

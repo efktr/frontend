@@ -6,6 +6,7 @@ import SearchResults from '../searchResults/SearchResults';
 import './App.css';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import Drug from '../drug/Drug';
+import ADR from '../adverseDrugReaction/AdverseDrugReaction';
 
 class App extends Component {
     render() {
@@ -26,6 +27,7 @@ class App extends Component {
                         <div>
                             <Route exact path="/" component={SearchResults}/>
                             <Route path="/drug/:drugbankId" component={Drug}/>
+                            <Route path="/adr/:umlsId" component={ADR}/>
                         </div>
                     </MuiThemeProvider>
                 </div>
