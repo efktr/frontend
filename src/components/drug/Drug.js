@@ -4,6 +4,7 @@ import { __API__, __DRUG__, __ADRS__, buildUrl } from './../../globals';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 import {List} from 'material-ui/List';
 import AdverseDrugReactionItem from './AdverseDrugReactionItem';
+import CircularProgress from 'material-ui/CircularProgress';
 import './Drug.css';
 
 export default class Drug extends Component {
@@ -26,7 +27,8 @@ export default class Drug extends Component {
         this.state = {
             drug: {},
             drugbankId: match.params.drugbankId,
-            adr: []
+            adrs: [],
+            adrsLoaded: false
         };
     }
 
@@ -34,12 +36,27 @@ export default class Drug extends Component {
         const url = buildUrl([__API__, __ADRS__, this.state.drugbankId]);
         get(url, (adrs) => {
             this.setState({
-                adr: adrs
+                adrs: adrs,
+                adrsLoaded: true
             });
         }).fail(() => {
             console.log("Failed to load ADRs");
         });
     }
+
+    loading() {
+        if (!this.state.adrsLoaded) {
+            return (<div style={{
+                textAlign: "center",
+                margin: "2em"
+            }}>
+                <CircularProgress />
+            </div>)
+        }
+
+    }
+
+
 
     render() {
         return (<div>
@@ -57,9 +74,11 @@ export default class Drug extends Component {
                         More: <a target="_blank" href={"https://drugbank.ca/drugs/" + this.state.drug.drugbankid}>Drugbank</a>
                     </CardText>
                 </Card>
+                {this.loading()}
                 <List>
-                    {this.state.adr.map(e => <AdverseDrugReactionItem key={e.name} data={e}/>)}
+                    {this.state.adrs.map(e => <AdverseDrugReactionItem key={e.name} data={e}/>)}
                 </List>
+
             </div>
         )
     };
