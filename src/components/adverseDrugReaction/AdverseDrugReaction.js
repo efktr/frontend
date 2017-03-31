@@ -42,7 +42,7 @@ export default class AdverseDrugReaction extends Component {
 
     render() {
         return (<div>
-                <Card>
+                <Card className="adr">
                     <CardHeader
                         title={this.state.adr.name}
                         subtitle={this.state.umlsId}

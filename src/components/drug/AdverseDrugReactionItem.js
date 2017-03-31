@@ -53,21 +53,23 @@ export default class AdverseDrugReactionItem extends Component {
                     <ToolbarGroup firstChild={true}>
                         {(this.state.range.mean()*100).toFixed(1) + "% " + this.state.name}
                     </ToolbarGroup>
-                    <ToolbarGroup>
+                    <ToolbarGroup style={{zIndex:0}}>
                         <IconButton {...this.props}
-                            touch={true}
-                            tooltip="I had this side effect"
-                            tooltipPosition="top-left"
-                            iconStyle={{width: 30, height: 30}}
-                            onTouchTap={this.positiveFeedback}>
+                                    touch={true}
+                                    tooltip="I had this side effect"
+                                    tooltipPosition="top-left"
+                                    iconStyle={{width: 30, height: 30}}
+                                    onTouchTap={this.positiveFeedback}
+
+                        >
                             <ThumbUp />
                         </IconButton>
                         <IconButton {...this.props}
-                            touch={true}
-                            tooltip="I don't recall this side effect"
-                            tooltipPosition="top-left"
-                            iconStyle={{width: 30, height: 30}}
-                            onTouchTap={this.negativeFeedback}>
+                                    touch={true}
+                                    tooltip="I don't recall this side effect"
+                                    tooltipPosition="top-left"
+                                    iconStyle={{width: 30, height: 30}}
+                                    onTouchTap={this.negativeFeedback}>
                             <ThumbDown />
                         </IconButton>
                     </ToolbarGroup>

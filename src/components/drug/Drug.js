@@ -43,7 +43,7 @@ export default class Drug extends Component {
 
     render() {
         return (<div>
-                <Card>
+                <Card className="drug">
                     <CardHeader
                         title={this.state.drug.name}
                         subtitle={this.state.drug.drugbankid}
@@ -57,9 +57,9 @@ export default class Drug extends Component {
                         More: <a target="_blank" href={"https://drugbank.ca/drugs/" + this.state.drug.drugbankid}>Drugbank</a>
                     </CardText>
                 </Card>
-            <List>
-                {this.state.adr.map(e => <AdverseDrugReactionItem key={e.name} data={e}/>)}
-            </List>
+                <List>
+                    {this.state.adr.map(e => <AdverseDrugReactionItem key={e.name} data={e}/>)}
+                </List>
             </div>
         )
     };

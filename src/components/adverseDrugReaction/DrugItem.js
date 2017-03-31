@@ -2,10 +2,7 @@ import React, {Component} from 'react';
 import {ListItem} from 'material-ui/List';
 import LinearProgress from 'material-ui/LinearProgress';
 import Range from '../../utilities/Range';
-import ThumbUp from 'material-ui/svg-icons/action/thumb-up';
-import ThumbDown from 'material-ui/svg-icons/action/thumb-down';
 import {Toolbar, ToolbarGroup} from 'material-ui/Toolbar';
-import IconButton from 'material-ui/IconButton';
 import Snackbar from 'material-ui/Snackbar';
 
 export default class DrugItem extends Component {
@@ -49,28 +46,9 @@ export default class DrugItem extends Component {
     render() {
         return(
             <ListItem disabled={true}>
-                <Toolbar className="adr-toolbar">
+                <Toolbar className="toolbar">
                     <ToolbarGroup firstChild={true} >
                         {(this.state.range.mean()*100).toFixed(1) + "% " + this.state.name}
-
-                    </ToolbarGroup>
-                    <ToolbarGroup>
-                        <IconButton {...this.props}
-                                    touch={true}
-                                    tooltip="I had this side effect"
-                                    tooltipPosition="top-left"
-                                    iconStyle={{width: 30, height: 30}}
-                                    onTouchTap={this.positiveFeedback}>
-                            <ThumbUp />
-                        </IconButton>
-                        <IconButton {...this.props}
-                                    touch={true}
-                                    tooltip="I don't recall this side effect"
-                                    tooltipPosition="top-left"
-                                    iconStyle={{width: 30, height: 30}}
-                                    onTouchTap={this.negativeFeedback}>
-                            <ThumbDown />
-                        </IconButton>
                     </ToolbarGroup>
                 </Toolbar>
                 <LinearProgress
