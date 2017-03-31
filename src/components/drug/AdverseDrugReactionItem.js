@@ -51,7 +51,7 @@ export default class AdverseDrugReactionItem extends Component {
             <ListItem disabled={true}>
                 <Toolbar className="adr-toolbar">
                     <ToolbarGroup firstChild={true}>
-                        {this.state.name}
+                        {(this.state.range.mean()*100).toFixed(1) + "% " + this.state.name}
                     </ToolbarGroup>
                     <ToolbarGroup>
                         <IconButton {...this.props}
@@ -78,6 +78,9 @@ export default class AdverseDrugReactionItem extends Component {
                     max={1}
                     min={0}
                     color="#c0646e"
+                    style={{
+                        height: "1em"
+                    }}
                 />
                 <Snackbar
                     open={this.state.open}

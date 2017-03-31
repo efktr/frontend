@@ -50,8 +50,9 @@ export default class DrugItem extends Component {
         return(
             <ListItem disabled={true}>
                 <Toolbar className="adr-toolbar">
-                    <ToolbarGroup firstChild={true}>
-                        {this.state.name}
+                    <ToolbarGroup firstChild={true} >
+                        {(this.state.range.mean()*100).toFixed(1) + "% " + this.state.name}
+
                     </ToolbarGroup>
                     <ToolbarGroup>
                         <IconButton {...this.props}
@@ -77,7 +78,11 @@ export default class DrugItem extends Component {
                     value={this.state.range.mean() + this.state.top + this.state.bottom}
                     max={1}
                     min={0}
-                    color="#c0646e"
+                    color="#c0b06d"
+                    style={{
+                        height: "1em"
+                    }}
+
                 />
                 <Snackbar
                     open={this.state.open}
