@@ -4,6 +4,7 @@ import { __API__, __DRUGS__, __ADR__, buildUrl } from './../../globals';
 import {Card, CardHeader} from 'material-ui/Card';
 import {List} from 'material-ui/List';
 import Drug from './DrugItem';
+import CircularProgress from 'material-ui/CircularProgress';
 import './AdverseDrugReaction.css';
 
 export default class AdverseDrugReaction extends Component {
