@@ -4,19 +4,30 @@ import {get} from 'jquery';
 import Result from './Result';
 import PubSub from 'pubsub-js';
 import {List} from 'material-ui/List';
+import queryString from 'query-string';
 import './SearchResults.css';
 
 export default class SearchResults extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             results: [],
             inputValue: '',
-            items: 10
+            items: 10,
+            query: queryString.parse(props.location.search)
         };
 
         this.handleScroll = this.handleScroll.bind(this);
+        this.searchFromQuery = this.searchFromQuery.bind(this);
+    }
+
+    searchFromQuery(){
+        let query = this.state.query.q;
+        if(query !== null){
+            this.performSearch(query);
+        }
     }
 
     handleScroll() {
@@ -42,6 +53,8 @@ export default class SearchResults extends Component {
                 this.performSearch();
             });
         });
+
+        this.searchFromQuery();
     }
 
     componentWillUnmount() {
@@ -50,11 +63,12 @@ export default class SearchResults extends Component {
         PubSub.unsubscribe(this.subscription);
     }
 
-    performSearch() {
+    performSearch(query) {
         const self = this;
-        const url = buildUrl([__API__, __SEARCH__ + "?q=" + self.state.inputValue]);
+        query = query || this.state.inputValue;
+        const url = buildUrl([__API__, __SEARCH__ + "?q=" + query]);
 
-        if(this.state.inputValue !== '') {
+        if(query !== '') {
             get(url, (data) => {
                 self.setState({
                     results: data,

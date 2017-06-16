@@ -26,7 +26,8 @@ export default class AdverseDrugReaction extends Component {
         this.state = {
             adr: {},
             umlsId: match.params.umlsId,
-            adrs: []
+            adrs: [],
+            drugsLoaded: false
         };
     }
 
@@ -34,7 +35,8 @@ export default class AdverseDrugReaction extends Component {
         const url = buildUrl([__API__, __DRUGS__, this.state.umlsId]);
         get(url, (adrs) => {
             this.setState({
-                adrs: adrs
+                adrs: adrs,
+                drugsLoaded: true
             });
         }).fail(() => {
             console.log("Failed to load ADRs");
@@ -42,7 +44,7 @@ export default class AdverseDrugReaction extends Component {
     }
 
     loading() {
-        if (!this.state.adrsLoaded) {
+        if (!this.state.drugsLoaded) {
             return (<div style={{
                 textAlign: "center",
                 margin: "2em"

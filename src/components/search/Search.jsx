@@ -4,6 +4,8 @@ import { __API__, __AUTOCOMPLETE__, buildUrl } from './../../globals';
 import AutoComplete from 'material-ui/AutoComplete';
 import { get } from 'jquery';
 import PubSub from 'pubsub-js';
+import { push } from 'react-router-redux'
+
 
 // FROM
 // http://www.material-ui.com/#/components/auto-complete
@@ -21,7 +23,7 @@ export default class Search extends Component {
     }
 
     itemSelected(){
-        console.log("here");
+        this.props.store.dispatch(push('/?q=' + this.state.inputValue));
     }
 
     performSearch() {
@@ -63,7 +65,7 @@ export default class Search extends Component {
                 underlineFocusStyle={{borderColor: "#c0646e"}}
                 filter={AutoComplete.caseInsensitiveFilter}
                 onUpdateInput={this.onUpdateInput}
-                onClick={this.itemSelected}
+                onNewRequest={this.itemSelected}
             />
         </div>
     };
