@@ -10,6 +10,10 @@ COPY . /usr/src/app
 # Use defaults or ENV file
 RUN npm install
 
+RUN REACT_APP_API=http://efktrapi.dallago.us npm run build
+
+RUN npm install -g serve
+
 EXPOSE 3000
 
-CMD [ "npm", "start" ]
+CMD [ "npm", "run", "serve" ]

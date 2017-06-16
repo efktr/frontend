@@ -13,10 +13,15 @@ export default class Search extends Component {
     constructor(props) {
         super(props);
         this.onUpdateInput = this.onUpdateInput.bind(this);
+        this.itemSelected = this.itemSelected.bind(this);
         this.state = {
             dataSource : [],
             inputValue : ''
         }
+    }
+
+    itemSelected(){
+        console.log("here");
     }
 
     performSearch() {
@@ -57,7 +62,9 @@ export default class Search extends Component {
                 dataSource={this.state.dataSource}
                 underlineFocusStyle={{borderColor: "#c0646e"}}
                 filter={AutoComplete.caseInsensitiveFilter}
-                onUpdateInput={this.onUpdateInput} />
+                onUpdateInput={this.onUpdateInput}
+                onClick={this.itemSelected}
+            />
         </div>
     };
 }
