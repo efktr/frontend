@@ -14,6 +14,16 @@ import { Provider } from 'react-redux'
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux'
 import { Route, Link } from 'react-router-dom';
 
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
+// Create theme based on primary color
+const theme = getMuiTheme({
+    palette: {
+        primary1Color: "#c0646e",
+    }
+});
+
+
 
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory();
@@ -42,11 +52,11 @@ class App extends Component {
                             </Link>
                         </div>
 
-                        <MuiThemeProvider>
+                        <MuiThemeProvider muiTheme={theme}>
                             <Search store={store}/>
                         </MuiThemeProvider>
 
-                        <MuiThemeProvider>
+                        <MuiThemeProvider muiTheme={theme}>
                             <div>
                                 <Route exact path="/" component={SearchResults}/>
                                 <Route path="/drug/:drugbankId" component={Drug}/>
@@ -54,7 +64,7 @@ class App extends Component {
                             </div>
                         </MuiThemeProvider>
                         <div style={{"paddingBottom":"2.5em"}}></div>
-                        <MuiThemeProvider>
+                        <MuiThemeProvider muiTheme={theme}>
                             <BottomMenu />
                         </MuiThemeProvider>
                     </div>

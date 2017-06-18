@@ -62,7 +62,6 @@ export default class Search extends Component {
             <AutoComplete
                 hintText="Drug or side effect"
                 dataSource={this.state.dataSource}
-                underlineFocusStyle={{borderColor: "#c0646e"}}
                 filter={AutoComplete.caseInsensitiveFilter}
                 onUpdateInput={this.onUpdateInput}
                 onNewRequest={this.itemSelected}
