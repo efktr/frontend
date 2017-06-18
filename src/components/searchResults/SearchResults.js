@@ -36,7 +36,7 @@ export default class SearchResults extends Component {
         const html = document.documentElement;
         const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
         const windowBottom = windowHeight + window.pageYOffset;
-        if (windowBottom >= docHeight) {
+        if (windowBottom >= (docHeight - 10)) {
             this.setState({
                 items: (this.state.items + 10 > this.state.results.length ? this.state.results.length : this.state.items + 10)
             });
