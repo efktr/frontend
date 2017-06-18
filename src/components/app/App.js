@@ -53,7 +53,7 @@ class App extends Component {
                                 <Route path="/adr/:umlsId" component={ADR}/>
                             </div>
                         </MuiThemeProvider>
-                        <div style={{"padding-bottom":"2.5em"}}></div>
+                        <div style={{"paddingBottom":"2.5em"}}></div>
                         <MuiThemeProvider>
                             <BottomMenu />
                         </MuiThemeProvider>
