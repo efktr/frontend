@@ -6,6 +6,9 @@ import {List} from 'material-ui/List';
 import Drug from './DrugItem';
 import CircularProgress from 'material-ui/CircularProgress';
 import './AdverseDrugReaction.css';
+import FontIcon from 'material-ui/FontIcon';
+
+const warningIcon = <FontIcon className="material-icons">warning</FontIcon>;
 
 export default class AdverseDrugReaction extends Component {
 
@@ -59,6 +62,7 @@ export default class AdverseDrugReaction extends Component {
         return (<div>
                 <Card className="adr">
                     <CardHeader
+                        avatar={warningIcon}
                         title={this.state.adr.name}
                         subtitle={this.state.umlsId}
                     />

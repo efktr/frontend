@@ -6,6 +6,7 @@ import SearchResults from '../searchResults/SearchResults';
 import './App.css';
 import Drug from '../drug/Drug';
 import ADR from '../adverseDrugReaction/AdverseDrugReaction';
+import BottomMenu from '../botttomMenu/BottomMenu'
 
 import createHistory from 'history/createBrowserHistory'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
@@ -51,6 +52,10 @@ class App extends Component {
                                 <Route path="/drug/:drugbankId" component={Drug}/>
                                 <Route path="/adr/:umlsId" component={ADR}/>
                             </div>
+                        </MuiThemeProvider>
+                        <div style={{"padding-bottom":"2.5em"}}></div>
+                        <MuiThemeProvider>
+                            <BottomMenu />
                         </MuiThemeProvider>
                     </div>
                 </ConnectedRouter>

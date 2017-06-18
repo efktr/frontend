@@ -6,6 +6,9 @@ import {List} from 'material-ui/List';
 import AdverseDrugReactionItem from './AdverseDrugReactionItem';
 import CircularProgress from 'material-ui/CircularProgress';
 import './Drug.css';
+import FontIcon from 'material-ui/FontIcon';
+
+const drugIcon = <FontIcon className="material-icons">blur_circular</FontIcon>;
 
 export default class Drug extends Component {
 
@@ -63,6 +66,7 @@ export default class Drug extends Component {
                         title={this.state.drug.name}
                         subtitle={this.state.drug.drugbankid}
                         showExpandableButton={true}
+                        avatar={drugIcon}
                     />
                     <CardText expandable={true}>
                         Products: {this.state.drug.products !== undefined ? this.state.drug.products.join(', ') : ""}
