@@ -81,6 +81,7 @@ export default class SearchResults extends Component {
     render() {
         let results = this.state.results.map(r => {
             return <Result
+                {...this.props}
                 data={r}
                 key={r.name + r.type}
             />;

@@ -7,11 +7,9 @@ import './App.css';
 import Drug from '../drug/Drug';
 import ADR from '../adverseDrugReaction/AdverseDrugReaction';
 import BottomMenu from '../botttomMenu/BottomMenu'
-
-import createHistory from 'history/createBrowserHistory'
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { store, history } from '../../stores/index'
 import { Provider } from 'react-redux'
-import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux'
+import { ConnectedRouter } from 'react-router-redux'
 import { Route, Link } from 'react-router-dom';
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -22,22 +20,6 @@ const theme = getMuiTheme({
         primary1Color: "#c0646e",
     }
 });
-
-
-
-// Create a history of your choosing (we're using a browser history in this case)
-const history = createHistory();
-// Build the middleware for intercepting and dispatching navigation actions
-const middleware = routerMiddleware(history);
-
-// Add the reducer to your store on the `router` key
-// Also apply our middleware for navigating
-const store = createStore(
-    combineReducers({
-        router: routerReducer
-    }),
-    applyMiddleware(middleware)
-);
 
 class App extends Component {
     render() {
@@ -58,14 +40,14 @@ class App extends Component {
 
                         <MuiThemeProvider muiTheme={theme}>
                             <div>
-                                <Route exact path="/" component={SearchResults}/>
+                                <Route exact path="/" component={(props) => <SearchResults {...props} store={store}/>}/>
                                 <Route path="/drug/:drugbankId" component={Drug}/>
                                 <Route path="/adr/:umlsId" component={ADR}/>
                             </div>
                         </MuiThemeProvider>
                         <div style={{"paddingBottom":"2.5em"}}></div>
                         <MuiThemeProvider muiTheme={theme}>
-                            <BottomMenu />
+                            <BottomMenu store={store} />
                         </MuiThemeProvider>
                     </div>
                 </ConnectedRouter>
