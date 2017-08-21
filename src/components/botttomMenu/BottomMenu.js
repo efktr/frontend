@@ -4,6 +4,8 @@ import Paper from 'material-ui/Paper';
 import FontIcon from 'material-ui/FontIcon';
 import Badge from 'material-ui/Badge';
 import './BottomMenu.css'
+import { push } from 'react-router-redux'
+
 
 export default class BottomMenu extends Component {
 
@@ -14,6 +16,8 @@ export default class BottomMenu extends Component {
             drugs: [],
             adrs: []
         };
+
+        this.goToPage = this.goToPage.bind(this);
     }
 
     componentDidMount() {
@@ -32,6 +36,11 @@ export default class BottomMenu extends Component {
 
         // Will unsubscribe from store sub
         this.storeSubscription();
+    }
+
+    goToPage(){
+        let link = '/drugs';
+        this.props.store.dispatch(push(link));
     }
 
     render() {
@@ -64,7 +73,7 @@ export default class BottomMenu extends Component {
                         <BottomNavigationItem
                             label="Drugs"
                             icon={drugIcon}
-                            onTouchTap={() => {}}
+                            onTouchTap={this.goToPage}
                         />
                     </BottomNavigation>
                 </Paper>

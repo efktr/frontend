@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
 import logo from '../../logo.png';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Search from '../search/Search';
-import SearchResults from '../searchResults/SearchResults';
-import './App.css';
-import Drug from '../drug/Drug';
-import ADR from '../adverseDrugReaction/AdverseDrugReaction';
-import BottomMenu from '../botttomMenu/BottomMenu'
+
 import { store, history } from '../../stores/index'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
 import { Route, Link } from 'react-router-dom';
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
+import Search from '../search/Search';
+import SearchResults from '../searchResults/SearchResults';
+import './App.css';
+import Drug from '../drug/Drug';
+import ADR from '../adverseDrugReaction/AdverseDrugReaction';
+import BottomMenu from '../botttomMenu/BottomMenu'
+import CombinedDrugs from '../combinedDrugs/CombinedDrugs'
 
 // Create theme based on primary color
 const theme = getMuiTheme({
@@ -41,6 +44,7 @@ class App extends Component {
                         <MuiThemeProvider muiTheme={theme}>
                             <div>
                                 <Route exact path="/" component={(props) => <SearchResults {...props} store={store}/>}/>
+                                <Route exact path="/drugs" component={(props) => <CombinedDrugs {...props} store={store}/>}/>
                                 <Route path="/drug/:drugbankId" component={Drug}/>
                                 <Route path="/adr/:umlsId" component={ADR}/>
                             </div>
