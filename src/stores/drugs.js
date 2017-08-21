@@ -3,6 +3,9 @@ import Drug from '../objects/Drug'
 // Manages a list of Drug items
 function drugs(state = [], action) {
     switch (action.type) {
+        case 'LOAD_STORED_STATE':
+            let t = action.storedState.drugs.map(drug => new Drug(drug));
+            return t;
         case 'ADD_DRUG':
             let duplicate = state.findIndex(function(drug){return drug.equals(action.payload)});
 

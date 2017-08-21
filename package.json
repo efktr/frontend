@@ -14,7 +14,8 @@
     "react-router-dom": "^4.0.0",
     "react-router-redux": "^5.0.0-alpha.6",
     "react-tap-event-plugin": "^2.0.1",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "redux-session": "^1.0.3"
   },
   "devDependencies": {
     "gh-pages": "^0.12.0",
