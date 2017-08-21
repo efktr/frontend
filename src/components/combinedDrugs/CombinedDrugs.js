@@ -6,6 +6,7 @@ import {List} from 'material-ui/List';
 import CircularProgress from 'material-ui/CircularProgress';
 import {GridList, GridTile} from 'material-ui/GridList';
 import AdverseDrugReactionItem from '../drug/AdverseDrugReactionItem';
+import '../../utilities/prototypeExtensions'
 
 export default class Drug extends Component {
 
@@ -74,12 +75,13 @@ export default class Drug extends Component {
 
     render() {
         return (<div>
-                <GridList cols={1.1}>
+                <GridList cols={3}>
                     {this.state.drugs.map((drug) => (
                         <GridTile
                             key={drug.identifier}
                             title={drug.name}
-                            titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
+                            titleBackground={drug.name.getHashCode().intToHSL()}
+                            rows={0.3}
                         >
                         </GridTile>
                     ))}
