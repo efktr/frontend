@@ -101,10 +101,10 @@ export default class Result extends Component {
                     <div>
                         {
                             this.state.inStore ?
-                                <IconButton onTouchTap = {this.removeFromStore} >
+                                <IconButton onTouchTap={this.removeFromStore} >
                                     {removeIcon}
                                 </IconButton> :
-                                <IconButton onTouchTap = {this.addToStore} >
+                                <IconButton onTouchTap={this.addToStore} >
                                     {addIcon}
                                 </IconButton>
                         }
