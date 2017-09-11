@@ -7,6 +7,7 @@ import AdverseDrugReactionItem from './AdverseDrugReactionItem';
 import CircularProgress from 'material-ui/CircularProgress';
 import './Drug.css';
 import FontIcon from 'material-ui/FontIcon';
+import Range from '../../utilities/Range';
 
 const drugIcon = <FontIcon className="material-icons">blur_circular</FontIcon>;
 
@@ -56,10 +57,20 @@ export default class Drug extends Component {
                 <CircularProgress />
             </div>)
         }
-
     }
 
     render() {
+        let frequencyAdrs = this.state.adrs
+            .filter(e => e.lower !== null && e.higher !== null)
+            .map(e => {
+                e.range = new Range(e.lower, e.higher);
+                return e;
+            })
+            .sort((e,i) => {
+                return e.range.mean() < i.range.mean()
+            });
+
+        let noFrequencyAdrs = this.state.adrs.filter(e => e.lower === null && e.higher === null);
         return (<div>
                 <Card className="drug">
                     <CardHeader
@@ -77,8 +88,9 @@ export default class Drug extends Component {
                     </CardText>
                 </Card>
                 {this.loading()}
-                <List>
-                    {this.state.adrs.map(e => <AdverseDrugReactionItem key={e.name} data={e}/>)}
+                <List className="drugsContainer">
+                    {frequencyAdrs.map(e => <AdverseDrugReactionItem key={e.name} data={e}/>)}
+                    {noFrequencyAdrs.map(e => <AdverseDrugReactionItem key={e.name} data={e}/>)}
                 </List>
 
             </div>

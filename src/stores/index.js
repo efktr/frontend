@@ -15,7 +15,6 @@ const middleware = routerMiddleware(history);
 const session = createSession({
     ns: 'efktr',
     selectState (state) {
-        console.log(state)
         return {
             drugs: state.drugs
         };

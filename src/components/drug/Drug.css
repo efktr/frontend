@@ -3,6 +3,11 @@
     z-index: 0;
 }
 
+.drugsContainer {
+    max-width: 40em;
+    margin: 0 auto;
+}
+
 .drug {
     position: sticky;
     position: -webkit-sticky;

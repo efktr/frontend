@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {ListItem} from 'material-ui/List';
 import LinearProgress from 'material-ui/LinearProgress';
-import Range from '../../utilities/Range';
 import ThumbUp from 'material-ui/svg-icons/action/thumb-up';
 import ThumbDown from 'material-ui/svg-icons/action/thumb-down';
 import {Toolbar, ToolbarGroup} from 'material-ui/Toolbar';
@@ -14,7 +13,8 @@ export default class AdverseDrugReactionItem extends Component {
         super(props);
         this.state = {
             name: props.data.name,
-            range: new Range(props.data.range),
+            range: props.data.range,
+            has_range: props.data.lower !== null && props.data.higher !== null,
             open: false,
             top: 0,
             bottom: 0
@@ -47,11 +47,29 @@ export default class AdverseDrugReactionItem extends Component {
     }
 
     render() {
+        let progress = undefined;
+        let title = this.state.name;
+
+        if (this.state.has_range === true){
+            progress = <LinearProgress
+                mode="determinate"
+                value={this.state.range.mean() + this.state.top + this.state.bottom}
+                max={1}
+                min={0}
+                color="#c0646e"
+                style={{
+                    height: "1em"
+                }}
+            />;
+
+            title += ", with " + (this.state.range.mean()*100).toFixed(1) + "% average frequency"
+        }
+
         return(
             <ListItem disabled={true}>
                 <Toolbar className="adr-toolbar">
                     <ToolbarGroup firstChild={true}>
-                        {(this.state.range.mean()*100).toFixed(1) + "% " + this.state.name}
+                        {title}
                     </ToolbarGroup>
                     <ToolbarGroup style={{zIndex:0}}>
                         <IconButton {...this.props}
@@ -74,16 +92,7 @@ export default class AdverseDrugReactionItem extends Component {
                         </IconButton>
                     </ToolbarGroup>
                 </Toolbar>
-                <LinearProgress
-                    mode="determinate"
-                    value={this.state.range.mean() + this.state.top + this.state.bottom}
-                    max={1}
-                    min={0}
-                    color="#c0646e"
-                    style={{
-                        height: "1em"
-                    }}
-                />
+                {progress}
                 <Snackbar
                     open={this.state.open}
                     message="Thank you for your feedback!"

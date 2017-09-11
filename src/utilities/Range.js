@@ -4,11 +4,8 @@ export default class Range {
     static GREATER = "+<";
     static SMALLER = ">+";
 
-    constructor(range){
-        range = range.replace(')',']');
-        range = range.replace('(','[');
-
-        this.range = JSON.parse(range);
+    constructor(lower, higher){
+        this.range = [lower, higher];
     }
 
     included(value){
@@ -22,6 +19,6 @@ export default class Range {
     }
 
     mean(){
-        return (this.range[0]+this.range[1])/2;
+        return this.range[0] === null ? null : (this.range[0]+this.range[1])/2;
     }
 }
