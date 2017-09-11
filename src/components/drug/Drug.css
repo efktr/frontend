@@ -8,13 +8,17 @@
     margin: 0 auto;
 }
 
+.priority {
+    z-index: 2 !important;
+}
+
 .drug {
     position: sticky;
     position: -webkit-sticky;
     left: 0;
     top: 0px;
     margin: 0 auto;
-    z-index: 3;
+    z-index: 1;
     width: 90%;
 }
 

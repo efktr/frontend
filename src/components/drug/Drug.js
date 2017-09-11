@@ -70,12 +70,13 @@ export default class Drug extends Component {
                 return e.range.mean() < i.range.mean()
             });
 
-        let noFrequencyAdrs = this.state.adrs.filter(e => e.lower === null && e.higher === null);
+        let noFrequencyAdrs = this.state.adrs.filter(e => e.lower === null || e.higher === null);
+
         return (<div>
                 <Card className="drug">
                     <CardHeader
                         title={this.state.drug.name}
-                        subtitle={this.state.drug.drugbankid}
+                        subtitle={<a style={{"textDecoration": "underline", "color": "inherit"}} target="_blank" href={"https://drugbank.ca/drugs/" + this.state.drug.drugbankid}> {this.state.drug.drugbankid} </a>}
                         showExpandableButton={true}
                         avatar={drugIcon}
                     />
@@ -83,14 +84,12 @@ export default class Drug extends Component {
                         Products: {this.state.drug.products !== undefined ? this.state.drug.products.join(', ') : ""}
                         <br />
                         Synonyms: {this.state.drug.synonyms !== undefined ? this.state.drug.synonyms.join(', ') : ""}
-                        <br />
-                        More: <a target="_blank" href={"https://drugbank.ca/drugs/" + this.state.drug.drugbankid}>Drugbank</a>
                     </CardText>
                 </Card>
                 {this.loading()}
                 <List className="drugsContainer">
-                    {frequencyAdrs.map(e => <AdverseDrugReactionItem key={e.name} data={e}/>)}
-                    {noFrequencyAdrs.map(e => <AdverseDrugReactionItem key={e.name} data={e}/>)}
+                    {frequencyAdrs.map(e => <AdverseDrugReactionItem key={e.umls_id} data={e}/>)}
+                    {noFrequencyAdrs.map(e => <AdverseDrugReactionItem key={e.umls_id} data={e}/>)}
                 </List>
 
             </div>

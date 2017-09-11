@@ -74,7 +74,7 @@ export default class AdverseDrugReactionItem extends Component {
                     <ToolbarGroup style={{zIndex:0}}>
                         <IconButton {...this.props}
                                     touch={true}
-                                    tooltip="I had this side effect"
+                                    tooltip={<div className="priority">I had this side effect</div>}
                                     tooltipPosition="top-left"
                                     iconStyle={{width: 30, height: 30}}
                                     onTouchTap={this.positiveFeedback}
