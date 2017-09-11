@@ -68,7 +68,7 @@ export default class AdverseDrugReaction extends Component {
                     />
                 </Card>
                 {this.loading()}
-                <List>
+                <List className="adrContainer">
                     {this.state.adrs.map(e => <Drug key={e.name} data={e}/>)}
                 </List>
             </div>

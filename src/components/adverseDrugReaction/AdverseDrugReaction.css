@@ -2,6 +2,11 @@
     background-color: inherit !important;
 }
 
+.adrContainer {
+    max-width: 40em;
+    margin: 0 auto;
+}
+
 .adr {
     position: sticky;
     position: -webkit-sticky;
