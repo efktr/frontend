@@ -65,11 +65,11 @@ export default class BottomMenu extends Component {
         return (<div>
                 <Paper className="BottomMenu">
                     <BottomNavigation>
-                        <BottomNavigationItem
-                            label="ADRs"
-                            icon={warningIcon}
-                            onTouchTap={() => {}}
-                        />
+                        {/*<BottomNavigationItem*/}
+                            {/*label="ADRs"*/}
+                            {/*icon={warningIcon}*/}
+                            {/*onTouchTap={() => {}}*/}
+                        {/*/>*/}
                         <BottomNavigationItem
                             label="Drugs"
                             icon={drugIcon}
