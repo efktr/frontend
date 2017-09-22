@@ -3,6 +3,12 @@
     z-index: 0;
 }
 
+.resize-linkout{
+    font-size: inherit !important;
+    color: inherit !important;
+    bottom:-.15em;
+}
+
 .drugsContainer {
     max-width: 40em;
     margin: 0 auto;

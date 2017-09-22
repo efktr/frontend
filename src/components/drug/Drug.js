@@ -10,6 +10,7 @@ import FontIcon from 'material-ui/FontIcon';
 import Range from '../../utilities/Range';
 
 const drugIcon = <FontIcon className="material-icons">blur_circular</FontIcon>;
+const linkOutIcon = <FontIcon className="material-icons resize-linkout">open_in_new</FontIcon>;
 
 export default class Drug extends Component {
 
@@ -76,7 +77,7 @@ export default class Drug extends Component {
                 <Card className="drug">
                     <CardHeader
                         title={this.state.drug.name}
-                        subtitle={<a style={{"textDecoration": "underline", "color": "inherit"}} target="_blank" href={"https://drugbank.ca/drugs/" + this.state.drug.drugbankid}> {this.state.drug.drugbankid} </a>}
+                        subtitle={<a style={{"textDecoration": "underline", "color": "inherit"}} target="_blank" href={"https://drugbank.ca/drugs/" + this.state.drug.drugbankid}>{this.state.drug.drugbankid}{linkOutIcon}</a>}
                         showExpandableButton={true}
                         avatar={drugIcon}
                     />
