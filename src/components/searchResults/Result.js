@@ -64,7 +64,7 @@ export default class Result extends Component {
     }
 
     goToPage(){
-        let link =  '/' + (this.state.element.type === "adr" ? "adr/" : "drug/") + this.state.element.reference;
+        let link =  '/' + (parseInt(this.state.element.adr) === 1 ? "adr/" : "drug/") + this.state.element.reference;
         this.props.store.dispatch(push(link));
     }
 
@@ -86,14 +86,14 @@ export default class Result extends Component {
 
         return(
             <ListItem
-                leftIcon={(this.state.element.type === "adr" ? warningIcon : drugIcon)}
+                leftIcon={(parseInt(this.state.element.adr) === 1 ? warningIcon : drugIcon)}
                 primaryText={
                     <div onClick={this.goToPage} >
                         {this.state.element.name}
                     </div>}
                 secondaryText={
                     <div onClick={this.goToPage} >
-                        {this.state.element.type.toString().capitalize()}
+                        Matched by {this.state.element.synonyms[0].toString().capitalize()} and {this.state.element.synonyms.length-1} others.
                     </div>
                 }
 
