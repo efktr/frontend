@@ -93,7 +93,7 @@ export default class Result extends Component {
                     </div>}
                 secondaryText={
                     <div onClick={this.goToPage} >
-                        Matched by {this.state.element.synonyms[0].toString().capitalize()} and {this.state.element.synonyms.length-1} others.
+                        Matched by {this.state.element.synonyms.length} item{this.state.element.synonyms.length > 1 ? "s" : ""}.
                     </div>
                 }
 
