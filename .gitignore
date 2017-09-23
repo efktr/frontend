@@ -18,3 +18,5 @@ yarn-error.log*
 
 private/
 .idea/
+
+package-lock.json
