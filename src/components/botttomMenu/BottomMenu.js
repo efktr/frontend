@@ -5,6 +5,8 @@ import FontIcon from 'material-ui/FontIcon';
 import Badge from 'material-ui/Badge';
 import './BottomMenu.css'
 import { push } from 'react-router-redux'
+import PubSub from 'pubsub-js';
+
 
 
 export default class BottomMenu extends Component {
@@ -44,14 +46,7 @@ export default class BottomMenu extends Component {
     }
 
     render() {
-        const warningIcon = <div>
-            <FontIcon className="material-icons">warning</FontIcon>
-            <Badge
-                badgeContent={this.state.adrs.length}
-                primary={true}
-                style={{position:"absolute"}}
-            />
-        </div>;
+        const warningIcon = <FontIcon className="material-icons">warning</FontIcon>;
         const drugIcon = <div>
             <FontIcon className="material-icons">blur_circular</FontIcon>
             <Badge
@@ -65,11 +60,11 @@ export default class BottomMenu extends Component {
         return (<div>
                 <Paper className="BottomMenu">
                     <BottomNavigation>
-                        {/*<BottomNavigationItem*/}
-                            {/*label="ADRs"*/}
-                            {/*icon={warningIcon}*/}
-                            {/*onTouchTap={() => {}}*/}
-                        {/*/>*/}
+                        <BottomNavigationItem
+                            label="Body"
+                            icon={warningIcon}
+                            onTouchTap={() => {PubSub.publish('SHOW_BODY');}}
+                        />
                         <BottomNavigationItem
                             label="Drugs"
                             icon={drugIcon}

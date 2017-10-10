@@ -16,6 +16,8 @@ import Drug from '../drug/Drug';
 import ADR from '../adverseDrugReaction/AdverseDrugReaction';
 import BottomMenu from '../botttomMenu/BottomMenu'
 import CombinedDrugs from '../combinedDrugs/CombinedDrugs'
+import BodyImage from '../bodyImage/BodyImage'
+
 
 // Create theme based on primary color
 const theme = getMuiTheme({
@@ -47,6 +49,8 @@ class App extends Component {
                                 <Route exact path="/drugs" component={(props) => <CombinedDrugs {...props} store={store}/>}/>
                                 <Route path="/drug/:drugbankId" component={Drug}/>
                                 <Route path="/adr/:umlsId" component={ADR}/>
+
+                                <BodyImage />
                             </div>
                         </MuiThemeProvider>
                         <div style={{"paddingBottom":"2.5em"}}></div>
