@@ -46,6 +46,8 @@ export default class Search extends Component {
                 console.log("There was an error processing the request")
             });
         }
+
+        PubSub.publish('SEARCH_INPUT_CHANGE', self.state.inputValue);
     }
 
     onUpdateInput = (inputValue) => {

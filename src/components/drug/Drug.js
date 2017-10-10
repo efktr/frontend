@@ -8,6 +8,7 @@ import CircularProgress from 'material-ui/CircularProgress';
 import './Drug.css';
 import FontIcon from 'material-ui/FontIcon';
 import Range from '../../utilities/Range';
+import PubSub from 'pubsub-js';
 
 const drugIcon = <FontIcon className="material-icons">blur_circular</FontIcon>;
 const linkOutIcon = <FontIcon className="material-icons resize-linkout">open_in_new</FontIcon>;
@@ -33,8 +34,51 @@ export default class Drug extends Component {
             drug: {},
             drugbankId: match.params.drugbankId,
             adrs: [],
-            adrsLoaded: false
+            displayed: [],
+            adrsLoaded: false,
+            items: 10,
+            inputValue: ''
         };
+
+        this.handleScroll = this.handleScroll.bind(this);
+    }
+
+    handleScroll() {
+        const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+        const body = document.body;
+        const html = document.documentElement;
+        const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
+        const windowBottom = windowHeight + window.pageYOffset;
+        if (windowBottom >= (docHeight - 10)) {
+            this.setState({
+                items: (this.state.items + 10 > this.state.displayed.length ? this.state.displayed.length : this.state.items + 10)
+            });
+        }
+    }
+
+    componentDidMount() {
+        window.addEventListener("scroll", this.handleScroll);
+
+        this.subscription = PubSub.subscribe('SEARCH_INPUT_CHANGE', (message, data) => {
+            this.setState({
+                inputValue: data
+            }, () => {
+                this.filter();
+            });
+        });
+    }
+
+    filter() {
+        this.setState({
+            displayed: this.state.adrs.filter((element) => {return element.name.match(new RegExp(this.state.inputValue, "i"))})
+        })
+    }
+
+
+    componentWillUnmount() {
+        window.removeEventListener("scroll", this.handleScroll);
+
+        PubSub.unsubscribe(this.subscription);
     }
 
     fetchAdrs() {
@@ -42,6 +86,7 @@ export default class Drug extends Component {
         get(url, (adrs) => {
             this.setState({
                 adrs: adrs,
+                displayed: adrs,
                 adrsLoaded: true
             });
         }).fail(() => {
@@ -61,17 +106,19 @@ export default class Drug extends Component {
     }
 
     render() {
-        let frequencyAdrs = this.state.adrs
-            .filter(e => e.lower !== null && e.higher !== null)
+        let filteredAndSorted = this.state.displayed
             .map(e => {
-                e.range = new Range(e.lower, e.higher);
+                if(e => e.lower !== null && e.higher !== null){
+                    e.range = new Range(e.lower, e.higher);
+                }
                 return e;
             })
             .sort((e,i) => {
-                return e.range.mean() < i.range.mean()
-            });
-
-        let noFrequencyAdrs = this.state.adrs.filter(e => e.lower === null || e.higher === null);
+                //return (e.lower === null || e.higher === null) && (i.lower !== null && i.higher !== null)
+                //return e.range !== undefined && i.range === undefined
+                return i.lower > e.lower && i.higher > e.higher
+            })
+            .slice(0, this.state.items);
 
         return (<div>
                 <Card className="drug">
@@ -89,8 +136,7 @@ export default class Drug extends Component {
                 </Card>
                 {this.loading()}
                 <List className="drugsContainer">
-                    {frequencyAdrs.map(e => <AdverseDrugReactionItem key={e.umls_id} data={e}/>)}
-                    {noFrequencyAdrs.map(e => <AdverseDrugReactionItem key={e.umls_id} data={e}/>)}
+                    {filteredAndSorted.map(e => <AdverseDrugReactionItem key={e.umls_id} data={e}/>)}
                 </List>
 
             </div>
