@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import {get} from 'jquery';
-import { __API__, __DRUG__, __ADRS__, buildUrl } from './../../globals';
+import { __API__, __DRUG__, __ADRS__, __ADR__, buildUrl } from './../../globals';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 import {List} from 'material-ui/List';
 import AdverseDrugReactionItem from './AdverseDrugReactionItem';
+import PossibleAdverseDrugReactionItem from './PossibleAdverseDrugReactionItem';
 import CircularProgress from 'material-ui/CircularProgress';
 import './Drug.css';
 import FontIcon from 'material-ui/FontIcon';
@@ -37,10 +38,12 @@ export default class Drug extends Component {
             displayed: [],
             adrsLoaded: false,
             items: 10,
-            inputValue: ''
+            inputValue: '',
+            searchAdrs: []
         };
 
         this.handleScroll = this.handleScroll.bind(this);
+        this.searchAdrs = this.searchAdrs.bind(this);
     }
 
     handleScroll() {
@@ -64,6 +67,7 @@ export default class Drug extends Component {
                 inputValue: data
             }, () => {
                 this.filter();
+                this.searchAdrs();
             });
         });
     }
@@ -88,6 +92,17 @@ export default class Drug extends Component {
                 adrs: adrs,
                 displayed: adrs,
                 adrsLoaded: true
+            });
+        }).fail(() => {
+            console.log("Failed to load ADRs");
+        });
+    }
+
+    searchAdrs() {
+        const url = buildUrl([__API__, __ADR__ + "?q=" + this.state.inputValue]);
+        get(url, (adrs) => {
+            this.setState({
+                searchAdrs: adrs.filter(e => !this.state.adrs.find(i => i.umls_id === e.umlsid))
             });
         }).fail(() => {
             console.log("Failed to load ADRs");
@@ -120,6 +135,21 @@ export default class Drug extends Component {
             })
             .slice(0, this.state.items);
 
+        let suggestions = <div/>;
+
+        if(this.state.searchAdrs.length > 0){
+            suggestions = <div>
+                <p className="drugsContainer">
+                    <strong>
+                        This effects match your search and may not be reported by this drug (click + to add them):
+                    </strong>
+                </p>
+                <List className="possibleAndrsContainer">
+                    {this.state.searchAdrs.map(e => <PossibleAdverseDrugReactionItem key={e.umlsid} data={e}/>)}
+                </List>
+            </div>;
+        }
+
         return (<div>
                 <Card className="drug">
                     <CardHeader
@@ -138,7 +168,7 @@ export default class Drug extends Component {
                 <List className="drugsContainer">
                     {filteredAndSorted.map(e => <AdverseDrugReactionItem key={e.umls_id} data={e}/>)}
                 </List>
-
+            {suggestions}
             </div>
         )
     };

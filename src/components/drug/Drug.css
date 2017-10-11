@@ -14,6 +14,12 @@
     margin: 0 auto;
 }
 
+.possibleAndrsContainer {
+    max-width: 40em;
+    margin: 0 auto;
+    background: lightgray;
+}
+
 .priority {
     z-index: 2 !important;
 }
