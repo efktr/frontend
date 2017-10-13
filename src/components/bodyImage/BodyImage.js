@@ -3,6 +3,7 @@ import EfktrBody from 'efktr-body';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import PubSub from 'pubsub-js';
+import './BodyImage.css';
 
 export default class BodyImage extends Component {
 
@@ -49,7 +50,7 @@ export default class BodyImage extends Component {
                 onRequestClose={this.handleClose}
                 autoScrollBodyContent={true}
             >
-                <EfktrBody  />
+                <EfktrBody />
             </Dialog>
         )
     }
