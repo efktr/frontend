@@ -17,6 +17,7 @@ import ADR from '../adverseDrugReaction/AdverseDrugReaction';
 import BottomMenu from '../botttomMenu/BottomMenu'
 import CombinedDrugs from '../combinedDrugs/CombinedDrugs'
 import BodyImage from '../bodyImage/BodyImage'
+import Predict from '../predict/Predict'
 
 
 // Create theme based on primary color
@@ -50,7 +51,9 @@ class App extends Component {
                                 <Route path="/drug/:drugbankId" component={Drug}/>
                                 <Route path="/adr/:umlsId" component={ADR}/>
 
+                                {/*Modals*/}
                                 <BodyImage />
+                                <Predict />
                             </div>
                         </MuiThemeProvider>
                         <div style={{"paddingBottom":"2.5em"}}></div>

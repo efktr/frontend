@@ -7,8 +7,6 @@ import './BottomMenu.css'
 import { push } from 'react-router-redux'
 import PubSub from 'pubsub-js';
 
-
-
 export default class BottomMenu extends Component {
 
     constructor(props){
@@ -46,7 +44,6 @@ export default class BottomMenu extends Component {
     }
 
     render() {
-        const warningIcon = <FontIcon className="material-icons">warning</FontIcon>;
         const drugIcon = <div>
             <FontIcon className="material-icons">blur_circular</FontIcon>
             <Badge
@@ -61,8 +58,13 @@ export default class BottomMenu extends Component {
                 <Paper className="BottomMenu">
                     <BottomNavigation>
                         <BottomNavigationItem
+                            label="Predict"
+                            icon={<FontIcon className="material-icons">subject</FontIcon>}
+                            onTouchTap={() => {PubSub.publish('SHOW_PREDADR');}}
+                        />
+                        <BottomNavigationItem
                             label="Body"
-                            icon={warningIcon}
+                            icon={<FontIcon className="material-icons">accessibility</FontIcon>}
                             onTouchTap={() => {PubSub.publish('SHOW_BODY');}}
                         />
                         <BottomNavigationItem
