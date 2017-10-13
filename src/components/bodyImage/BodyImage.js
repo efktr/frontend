@@ -11,10 +11,6 @@ export default class BodyImage extends Component {
         open: false,
     };
 
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         this.subscription = PubSub.subscribe('SHOW_BODY', () => {
             this.setState({
@@ -49,6 +45,12 @@ export default class BodyImage extends Component {
                 open={this.state.open}
                 onRequestClose={this.handleClose}
                 autoScrollBodyContent={true}
+                contentStyle={{
+                    width: '90%',
+                    maxWidth: 'none',
+                    height: '100%',
+                    maxHeight: 'none',
+                }}
             >
                 <EfktrBody />
             </Dialog>
