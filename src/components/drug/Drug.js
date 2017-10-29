@@ -78,7 +78,6 @@ export default class Drug extends Component {
         })
     }
 
-
     componentWillUnmount() {
         window.removeEventListener("scroll", this.handleScroll);
 
